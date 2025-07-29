@@ -25,6 +25,20 @@ int main() {
         Phare(16, make_group_flashes(2, 10000000)),// Cap Fréhel
         Phare(17, make_group_flashes(2, 10000000)) // Grands Jardins
     };
+    
+    sleep_ms(2000);
+
+    for (int pin = 0; pin <= 20; ++pin) {
+        gpio_put(pin, 1);  // Met la broche à l'état haut (3.3V)
+    }
+
+    sleep_ms(2000);
+
+    for (int pin = 0; pin <= 20; ++pin) {
+        gpio_put(pin, 0);  // Met la broche à l'état bas (0V)
+    }
+
+    sleep_ms(2000);
 
     for (int pin = 0; pin <= 20; ++pin) {
         gpio_put(pin, 1);  // Met la broche à l'état haut (3.3V)
