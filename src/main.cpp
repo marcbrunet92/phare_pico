@@ -26,6 +26,12 @@ int main() {
         Phare(17, make_group_flashes(2, 10000000)) // Grands Jardins
     };
 
+    for (int pin = 0; pin <= 20; ++pin) {
+        gpio_put(pin, 1);  // Met la broche à l'état haut (3.3V)
+        sleep_ms(2000);
+        gpio_put(pin, 0);  // Met la broche à l'état bas (0V)
+    }
+
     while (true) {
         uint64_t now = time_us_64();
         for (auto& phare : phares) {
