@@ -23,10 +23,12 @@ set(CMAKE_CXX_STANDARD 17)
 
 pico_sdk_init()
 
-add_executable(phare_pico
-    src/main.cpp
-    src/Phare.cpp
-)
+#add_executable(phare_pico
+#    src/main.cpp
+#    src/Phare.cpp
+# )
+
+add_executable(phare_pico src/temp.cpp)
 
 target_include_directories(phare_pico PRIVATE src)
 
