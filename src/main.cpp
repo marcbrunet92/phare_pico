@@ -22,8 +22,8 @@ int main() {
         Phare(12, make_group_flashes(5, 15000000)),// Le Four
         Phare(13, make_group_flashes(1, 15000000)),// Saint Matthieu
         Phare(14, make_group_flashes(2, 6000000)), // Petit Minou
-        Phare(15, make_group_flashes(2, 10000000)),// Cap Fréhel
-        Phare(16, make_group_flashes(2, 10000000)) // Grands Jardins
+        Phare(16, make_group_flashes(2, 10000000)),// Cap Fréhel
+        Phare(17, make_group_flashes(2, 10000000)) // Grands Jardins
     };
 
     while (true) {
