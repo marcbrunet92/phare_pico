@@ -3,7 +3,7 @@
 #include <vector>
 
 void start() {
-    sleep_ms(2000);
+    sleep_ms(1000);
 
     for (int pin = 0; pin <= 21; ++pin) {
         gpio_put(pin, 1);  // Met la broche à l'état haut (3.3V)
