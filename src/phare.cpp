@@ -38,10 +38,10 @@ Phare::Phare(uint gpio, const std::vector<SignalStep>& pattern, uint64_t offset_
 
 void Phare::update(uint64_t now) {
     if (now >= next_change_us_) {
+        current_step_ = (current_step_ + 1) % pattern_.size();
         const auto& step = pattern_[current_step_];
         gpio_put(gpio_, step.led_on);
-        next_change_us_ = now + step.duration_us;
-        current_step_ = (current_step_ + 1) % pattern_.size();
+        next_change_us_ += step.duration_us;
     }
 }
 
