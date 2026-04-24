@@ -1,7 +1,12 @@
 #include "Phare.hpp"
 
-Phare::Phare(uint gpio, const std::vector<SignalStep>& pattern, uint64_t offset_us)
-    : gpio_(gpio), pattern_(pattern), current_step_(0) {
+Phare::Phare(uint gpio, const std::vector<SignalStep>& pattern, uint64_t offset_us, float vitesse)
+    : gpio_(gpio), pattern_(pattern), current_step_(0), vitesse_(vitesse) {
+
+    // Appliquer la vitesse aux durées du pattern
+    for (auto& step : pattern_) {
+        step.duration_us = static_cast<uint32_t>(step.duration_us / vitesse_);
+    }
 
     gpio_init(gpio_);
     gpio_set_dir(gpio_, GPIO_OUT);
