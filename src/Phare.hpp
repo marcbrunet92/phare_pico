@@ -11,7 +11,7 @@ struct SignalStep {
 
 class Phare {
 public:
-    Phare(uint gpio, const std::vector<SignalStep>& pattern, uint64_t offset_us = 0);
+    Phare(uint gpio, const std::vector<SignalStep>& pattern, uint64_t offset_us = 0, float vitesse = 1.0f);
     void update(uint64_t now);
 
 private:
@@ -19,6 +19,7 @@ private:
     std::vector<SignalStep> pattern_;
     size_t current_step_;
     uint64_t next_change_us_;
+    float vitesse_;
 };
 
 
