@@ -1,0 +1,54 @@
+name: Build Pico Firmware
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install ARM toolchain
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y gcc-arm-none-eabi libnewlib-arm-none-eabi build-essential cmake
+
+      - name: Clone Pico SDK 2.1.1
+        run: |
+          git clone --branch 2.1.1 --depth 1 --recurse-submodules \
+            https://github.com/raspberrypi/pico-sdk.git /opt/pico-sdk
+
+      - name: Configure with CMake
+        run: |
+          mkdir -p build
+          cd build
+          cmake .. \
+            -DPICO_SDK_PATH=/opt/pico-sdk \
+            -DPICO_BOARD=pico2 \
+            -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build firmware
+        run: |
+          cd build
+          make -j$(nproc)
+
+      - name: Collect firmware files
+        run: |
+          mkdir -p firmware
+          cp build/phare_pico.uf2 firmware/
+          cp build/phare_pico.elf firmware/
+          cp build/phare_pico.bin firmware/
+
+      - name: Upload firmware artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: phare_pico-firmware
+          path: firmware/
+          if-no-files-found: error
