@@ -1,0 +1,45 @@
+===============================================================
+  PHARE PICO - INSTRUCTIONS POUR FLASHER LE FIRMWARE (WINDOWS)
+===============================================================
+
+ÉTAPES :
+--------
+
+1. Télécharger l'artefact depuis GitHub Actions :
+   - Aller sur https://github.com/marcbrunet92/phare_pico/actions
+   - Cliquer sur le dernier run "Build Pico Firmware"
+   - Télécharger l'artefact "phare_pico-firmware" (fichier .zip)
+   - Extraire le zip — récupérer le fichier phare_pico.uf2
+
+2. Mettre le Pico en mode BOOTSEL :
+   - Maintenir le bouton BOOTSEL enfoncé sur le Pico
+   - Brancher le câble USB (tout en maintenant BOOTSEL)
+   - Le Pico apparaît comme un lecteur USB nommé "RPI-RP2"
+   - Relâcher le bouton BOOTSEL
+
+3. Copier le firmware sur le Pico :
+
+   --- COMMANDE WINDOWS (invite de commandes / CMD) ---
+
+   Remplacez D: par la lettre de lecteur du Pico (vérifier dans l'Explorateur)
+
+   copy phare_pico.uf2 D:\
+
+   --- COMMANDE POWERSHELL ---
+
+   Copy-Item -Path "phare_pico.uf2" -Destination "D:\"
+
+   --- EXEMPLE AVEC CHEMIN COMPLET ---
+
+   copy C:\Users\%USERNAME%\Downloads\phare_pico.uf2 D:\
+
+   ou en PowerShell :
+
+   Copy-Item -Path "$env:USERPROFILE\Downloads\phare_pico.uf2" -Destination "D:\"
+
+4. Le Pico redémarre automatiquement et exécute le firmware.
+
+===============================================================
+NOTE : La lettre de lecteur (D:, E:, F:...) peut varier.
+       Vérifier dans l'Explorateur de fichiers Windows.
+===============================================================
